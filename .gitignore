@@ -1,0 +1,43 @@
+# ==========================================
+# Archivos y carpetas generados por la compilación
+# ==========================================
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+[Dd]ebug/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Oo]ut/
+
+# ==========================================
+# Archivos de Visual Studio y configuraciones locales
+# ==========================================
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+*.rsuser
+
+# ==========================================
+# Archivos temporales del sistema operativo
+# ==========================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ==========================================
+# Configuración local y secretos
+# ==========================================
+# Evita subir credenciales locales o configuraciones específicas del desarrollador
+appsettings.Development.json
+appsettings.Local.json
