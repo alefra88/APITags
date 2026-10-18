@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TagAPI.DTO;
-using TagAPI.Services.Interfaces;
 using TagAPI.Extensions;
+using TagAPI.Services.Interfaces;
 
 namespace TagAPI.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class TagsController : ControllerBase

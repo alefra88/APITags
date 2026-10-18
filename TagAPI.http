@@ -1,6 +1,23 @@
 @TagAPI_HostAddress = http://localhost:5045
 
-GET {{TagAPI_HostAddress}}/weatherforecast/
-Accept: application/json
+### 1. Iniciar sesión para obtener el Token
+# Haz clic en "Send request" / "Ejecutar" aquí primero
+POST {{TagAPI_HostAddress}}/api/auth/login
+Content-Type: application/json
+{
+  "usuario": "",
+  "password": ""
+}
 
-###
+### 2. Pega aquí el token que recibiste en el paso anterior
+@MiToken = 
+### 3. Consultar todos los Tags (Requiere Token)
+# Haz clic en "Send request" / "Ejecutar" aquí después de pegar el token
+GET {{TagAPI_HostAddress}}/api/tags
+Accept: application/json
+Authorization: Bearer {{MiToken}}
+
+### 4. Consultar un Tag por ID (Requiere Token)
+GET {{TagAPI_HostAddress}}/api/tags/TAG-554B9688
+Accept: application/json
+Authorization: Bearer {{MiToken}}
