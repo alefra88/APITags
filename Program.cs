@@ -24,6 +24,8 @@ var awsOptions = builder.Configuration.GetAWSOptions();
 builder.Services.AddDefaultAWSOptions(awsOptions);
 builder.Services.AddScoped<IDynamoDBContext, DynamoDBContext>();
 builder.Services.AddAWSService<IAmazonDynamoDB>();
+// LambdaEventSource.HttpApi es el formato que usan las Lambda Function URLs
+builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 
 var app = builder.Build();
 
