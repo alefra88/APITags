@@ -29,6 +29,17 @@ builder.Services.AddScoped<IUsuarioRepo, UsuarioRepo>();
 // 3. Configuración para AWS Lambda (Function URLs usan HttpApi)
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("PermitirAngular", policy =>
+//    {
+//        // El puerto donde corre ng serve
+//        policy.WithOrigins("http://sadt-app.s3-website.us-east-2.amazonaws.com")
+//              .AllowAnyHeader()
+//              .AllowAnyMethod();
+//    });
+//});
+
 // 4. Configuración de Seguridad: Autenticación con JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -46,22 +57,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("PermitirAngular", policy =>
-    {
-        // El puerto donde corre ng serve
-        policy.WithOrigins("http://localhost:4200")
-              .AllowAnyHeader()
-              .AllowAnyMethod();
-    });
-});
+
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
 // 5. Configurar el pipeline HTTP
-// (Swagger eliminado intencionalmente. Las pruebas se harán vía TagAPI.http)
+//app.UseCors("PermitirAngular");
 
 app.UseAuthentication();
 app.UseAuthorization();
