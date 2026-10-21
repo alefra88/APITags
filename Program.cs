@@ -40,7 +40,7 @@ builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 //    });
 //});
 
-// 4. Configuración de Seguridad: Autenticación con JWT
+// 4. Configuración de Seguridad: Autenticación con JWT (CONFIGURA EL ESQUEMA Y LA VALIDACIÓN)
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -57,7 +57,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-
+//DEFINE POLITICAS Y REQUISITOS
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
@@ -65,7 +65,9 @@ var app = builder.Build();
 // 5. Configurar el pipeline HTTP
 //app.UseCors("PermitirAngular");
 
+//ESTABLECE LA IDENTIDAD
 app.UseAuthentication();
+//EVALUA EL ACCESO
 app.UseAuthorization();
 
 app.MapControllers();
