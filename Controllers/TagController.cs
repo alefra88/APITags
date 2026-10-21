@@ -7,6 +7,7 @@ using TagAPI.Services.Interfaces;
 
 namespace TagAPI.Controllers
 {
+//PROTEGE EL ENDPOINT (authorize)
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
