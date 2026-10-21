@@ -42,15 +42,28 @@ builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 
 // 4. Configuración de Seguridad: Autenticación con JWT (CONFIGURA EL ESQUEMA Y LA VALIDACIÓN)
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    //configura los paramtros de validación del token JWT
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
+            /*El Issuer (Emisor) es la entidad que generó el token. Al activarlo,
+            obligas a la API a verificar el origen. Con ValidIssuer le dices exactamente
+            qué nombre esperas (leyéndolo de la configuración). Si alguien intenta usar un
+            token generado por un servidor distinto, la API lo rechaza.*/
             ValidateIssuer = true,
+            /*l Audience (Audiencia) indica para qué cliente está destinado el token.
+            Esto asegura que el token fue emitido específicamente para tu aplicación frontend.*/
             ValidateAudience = true,
+            /*Activa el control del tiempo. La API leerá la fecha de expiración interna del token 
+             y bloqueará el acceso automáticamente si el tiempo ya transcurrió.*/
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
             ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            /*Le exige a la API que valide matemáticamente la firma del token utilizando la clave secreta simétrica (Jwt:Key).
+            Si un atacante intercepta un token válido e intenta alterar su contenido (ejem, cambiarse el rol de usuario a administrador),
+            la firma original se corrompe. Al recibirlo, la API usa esta clave para darse cuenta de la manipulación y rechaza la petición
+            al instante.*/
             ValidAudience = builder.Configuration["Jwt:Audience"],
             // La clave secreta debe tener al menos 16 caracteres
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"] ?? string.Empty))
