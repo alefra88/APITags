@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -12,11 +13,13 @@ namespace TagAPI.Services.Impl
     {
         private readonly IConfiguration _config;
         private readonly IUsuarioRepo _usuarioRepo;
+  
 
         public AuthService(IConfiguration config, IUsuarioRepo usuarioRepo)
         {
             _config = config;
             _usuarioRepo = usuarioRepo;
+
         }
 
         public async Task<string?> AutenticarAsync(LoginRequestDTO request)
